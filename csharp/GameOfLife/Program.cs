@@ -51,7 +51,7 @@ namespace GameOfLife
             World World = wld;
             Console.Clear();
             Console.WriteLine();
-            Console.WriteLine("Press any key to exit Time: " + t);
+            Console.WriteLine("    LIVE = " + World.live + "    DEAD = " + World.dead  + "    TIME = " + t + "    Press any key to exit.");
             Console.WriteLine();
             World.PrintGameGrid();
         }
