@@ -120,6 +120,8 @@ namespace GameOfLife
                 for (int y = 0; y <= size; y++)
                 {
                     r = rand.Next(0,2);
+                    if(r == 1)
+                        live = live + 1;
                     gameGrid[x, y] = r;
                 }
         }
@@ -154,7 +156,7 @@ namespace GameOfLife
                     // Rule 1. Any live cell with fewer than two live neighbours dies, as if caused by under-population.
                     if (count < 2)
                     {
-                        status = 0;
+                        { status = 0; dead++; }
                         break;
                     }
 
@@ -237,7 +239,7 @@ namespace GameOfLife
             switch (pattern)                // row, col on indexing
             {
                 // Still Lifes
-                case "b":  // Block
+                case "B":  // Block
                     {
                         gameGrid[09, 09] = 1;
                         limbo[09, 09] = 1;
@@ -252,7 +254,7 @@ namespace GameOfLife
                     }
 
                 // Oscilators
-                case "l": // Blinker
+                case "L": // Blinker
                     {
                         gameGrid[09, 09] = 1;
                         limbo[09, 09] = 1;
@@ -265,7 +267,7 @@ namespace GameOfLife
                     }
 
                 //Spaceships
-                case "g": // Glider
+                case "G": // Glider
                     {
                         gameGrid[10, 09] = 1;
                         limbo[10, 09] = 1;
@@ -281,7 +283,7 @@ namespace GameOfLife
                         break;
                     }
 
-                case "bt":
+                case "T":
                     {
                         gameGrid[10, 09] = 1;
                         limbo[10, 09] = 1;
@@ -303,7 +305,7 @@ namespace GameOfLife
                         break;
                     }
 
-                case "r":
+                case "R":
                     {
                         RandomGrid();
                         break;
@@ -311,8 +313,7 @@ namespace GameOfLife
 
                 default:
                     {
-                        Console.WriteLine("No matching pattern");
-                        Console.ReadKey();
+                        RandomGrid();
                         break;
                     }
             }

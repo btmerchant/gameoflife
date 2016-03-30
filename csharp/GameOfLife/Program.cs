@@ -14,11 +14,22 @@ namespace GameOfLife
         begin:
             Stopwatch timer = new Stopwatch();
             World Game = new World();
+            World.live = 0;
+            World.dead = 0;
             Game.ClearGrid();
-            Console.WriteLine("Seed Pattern Choices (enter a letter to choose) = b-Block - l-Blinker - g-Glider - (r for random)");
-            Console.WriteLine("Please enter a seed type: ");
-            string seed = Console.ReadLine();
-            Game.Seed(seed);
+            Console.WriteLine();
+            Console.WriteLine("Please choose a Pattern with witch to Seed the Game Grid (enter a letter to choose)");
+            Console.WriteLine();
+            Console.WriteLine("b = Block");
+            Console.WriteLine();
+            Console.WriteLine("l = Blinker");
+            Console.WriteLine();
+            Console.WriteLine("G = Glider");
+            Console.WriteLine();
+            Console.WriteLine("r = Random Fill");
+            Console.WriteLine();
+            ConsoleKeyInfo seed = Console.ReadKey(true);
+            Game.Seed(seed.Key.ToString());
             int seconds = 0;            
             UpdateConsole(Game, seconds);
             Console.ReadKey();
@@ -41,13 +52,13 @@ namespace GameOfLife
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine("                            Thanks for Playing");
+            Console.WriteLine("               Thanks for Playing! - Total Time = " + (seconds / 10) + " seconds.");
             Console.WriteLine();
             Console.WriteLine("            During this game there were " + World.live + " Live Cells created.");
             Console.WriteLine();
             Console.WriteLine("                    There were also " + World.dead + " Cells destroyed.");
             Console.WriteLine();
-            Console.WriteLine("                      Press any key to play again!");
+            Console.WriteLine("                       Press any key to play again!");
             Console.ReadKey();
             Console.Clear();
             goto begin;
@@ -58,7 +69,7 @@ namespace GameOfLife
             World World = wld;
             Console.Clear();
             Console.WriteLine();
-            Console.WriteLine("    LIVE = " + World.live + "    DEAD = " + World.dead  + "    TIME = " + t + "    Press any key to exit.");
+            Console.WriteLine("          LIVE = " + World.live + "    DEAD = " + World.dead  + "      TIME = " + t + "        Press any key to exit.");
             Console.WriteLine();
             World.PrintGameGrid();
         }
