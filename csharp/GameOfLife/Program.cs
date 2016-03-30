@@ -27,6 +27,8 @@ namespace GameOfLife
             Console.WriteLine();
             Console.WriteLine("G = Glider");
             Console.WriteLine();
+            Console.WriteLine("s = Lightweight Spaceship");
+            Console.WriteLine();
             Console.WriteLine("r = Random Fill");
             Console.WriteLine();
             ConsoleKeyInfo seed = Console.ReadKey(true);

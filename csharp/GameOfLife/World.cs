@@ -283,6 +283,30 @@ namespace GameOfLife
                         break;
                     }
 
+                case "S": // Lightweight Spaceship
+                    {
+                        gameGrid[10, 10] = 1;
+                        limbo[10, 10] = 1;
+                        gameGrid[10, 13] = 1;
+                        limbo[10, 13] = 1;
+                        gameGrid[11, 14] = 1;
+                        limbo[11, 14] = 1;
+                        gameGrid[12, 10] = 1;
+                        limbo[12, 10] = 1;
+                        gameGrid[12, 14] = 1;
+                        limbo[12, 14] = 1;
+                        gameGrid[13, 11] = 1;
+                        limbo[13, 11] = 1;
+                        gameGrid[13, 12] = 1;
+                        limbo[13, 12] = 1;
+                        gameGrid[13, 13] = 1;
+                        limbo[13, 13] = 1;
+                        gameGrid[13, 14] = 1;
+                        limbo[13, 14] = 1;
+                        live = live + 9;
+                        break;
+                    }
+
                 case "T":
                     {
                         gameGrid[10, 09] = 1;
