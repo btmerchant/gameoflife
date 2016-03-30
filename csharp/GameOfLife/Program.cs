@@ -14,7 +14,8 @@ namespace GameOfLife
         begin:
             Stopwatch timer = new Stopwatch();
             World Game = new World();
-            Console.WriteLine("Seed Pattern Choices = Block - Blinker - Glider - (r for random)");
+            Game.ClearGrid();
+            Console.WriteLine("Seed Pattern Choices (enter a letter to choose) = b-Block - l-Blinker - g-Glider - (r for random)");
             Console.WriteLine("Please enter a seed type: ");
             string seed = Console.ReadLine();
             Game.Seed(seed);
@@ -40,9 +41,7 @@ namespace GameOfLife
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine("                                 Bye Bye");
-            Console.WriteLine();
-            Console.WriteLine("                    Thanks for Living, Playing that is.");
+            Console.WriteLine("                            Thanks for Playing");
             Console.WriteLine();
             Console.WriteLine("            During this game there were " + World.live + " Live Cells created.");
             Console.WriteLine();

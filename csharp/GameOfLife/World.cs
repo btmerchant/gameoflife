@@ -133,6 +133,15 @@ namespace GameOfLife
                 }
         }
 
+        public void ClearGrid()
+        {
+            for (int x = 0; x <= size; x++)
+                for (int y = 0; y <= size; y++)
+                {
+                    gameGrid[x, y] = 0;
+                }
+        }
+
         public int Rules(int row, int col, int status)
         {
             int Status = status;
@@ -228,7 +237,7 @@ namespace GameOfLife
             switch (pattern)                // row, col on indexing
             {
                 // Still Lifes
-                case "Block":
+                case "b":  // Block
                     {
                         gameGrid[09, 09] = 1;
                         limbo[09, 09] = 1;
@@ -243,7 +252,7 @@ namespace GameOfLife
                     }
 
                 // Oscilators
-                case "Blinker":
+                case "l": // Blinker
                     {
                         gameGrid[09, 09] = 1;
                         limbo[09, 09] = 1;
@@ -256,7 +265,7 @@ namespace GameOfLife
                     }
 
                 //Spaceships
-                case "Glider":
+                case "g": // Glider
                     {
                         gameGrid[10, 09] = 1;
                         limbo[10, 09] = 1;
