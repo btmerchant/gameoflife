@@ -11,6 +11,7 @@ namespace GameOfLife
     {
         static void Main(string[] args)
         {
+            Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
         begin:
             Stopwatch timer = new Stopwatch();
             World Game = new World();
