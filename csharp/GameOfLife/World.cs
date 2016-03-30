@@ -8,7 +8,7 @@ namespace GameOfLife
 {
     class World
     {
-        private static int _width = 25;
+        private static int _width = 45;
         private static int _size = width - 1;
         private static int _live = 0;
         private static int _dead = 0;
