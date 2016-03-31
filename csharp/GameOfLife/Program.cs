@@ -19,6 +19,10 @@ namespace GameOfLife
             World.dead = 0;
             Game.ClearGrid();
             Console.WriteLine();
+            Console.WriteLine(" This is an implimentation of Conway's Game Of Life");
+            Console.WriteLine();
+            Console.WriteLine(" It simulates the life cycle of simple cells in a Virtual World Grid");
+            Console.WriteLine();
             Console.WriteLine(" Please choose a Pattern with witch to Seed the Game Grid (enter a letter to choose)");
             Console.WriteLine();
             Console.WriteLine(" Just press ENTER at any time to move forward and except the Default selections.");
