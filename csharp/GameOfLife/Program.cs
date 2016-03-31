@@ -61,7 +61,7 @@ namespace GameOfLife
             Console.WriteLine();
             Console.WriteLine("            During this game there were " + World.live + " Live Cells created.");
             Console.WriteLine();
-            Console.WriteLine("                    There were also " + World.dead + " Cells destroyed.");
+            Console.WriteLine("                  There were also " + World.dead + " Cells destroyed.");
             Console.WriteLine();
             Console.WriteLine("         Press any key to play again!    or  'Q'  to Quit the game.");
             ConsoleKeyInfo endGame = Console.ReadKey(true);
