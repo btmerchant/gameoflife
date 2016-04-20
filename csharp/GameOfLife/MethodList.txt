@@ -1,18 +1,30 @@
-﻿public void PrintGameGrid()
+﻿
+public void PrintGameGrid()
 	Displays the current state of the Game Grid in the console.
+
 public void Cycle()
-	Cycles through the Grid, mirrors the grid to Limbo, calls UpdateGrid().
+	Cycles through the Grid, calls Rules() on each cell, mirrors the grid to Limbo, calls UpdateGrid() at the end.
+
 public void RandomGrid()
 	Fills the Game Grid Array with Random cells either live or not.
+
 public void UpdateGrid()
 	Coppies Limbo to the Main Game Grid.
+
 public void ClearGrid()
 	Zeros all the elements of the Game Grid(so the non live cells dont display in console).
+
 public int Rules(int row, int col, int status)
-	Applies the rules to the peticular Cell and returns its updated status(live or dead).
+	Calls PerimiterCount(), Applies the rules to the peticular Cell and returns its updated status(live or dead).
+
 public int PerimiterCount(int row, int col)
 	Tests the peticular cell, perimiter and tallys the number of live cells around it, returns that count.
+
 public void Seed(string pattern)
 	Loads the Game Grid with the selected pattern of live cells(there are a number of predefined choices).
+
 public static void UpdateConsole(World wld, int t)
 	Once the Game has started it updates the console display to show the grid and the stats.
+
+public static Shadow()
+	Call after the Initial Pattern is loaded to also load the Limbo[] shadow array.

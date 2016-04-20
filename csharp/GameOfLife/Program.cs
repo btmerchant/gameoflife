@@ -15,8 +15,8 @@ namespace GameOfLife
         begin:
             Stopwatch timer = new Stopwatch();
             World Game = new World();
-            World.live = 0;
-            World.dead = 0;
+            Game.live = 0;
+            Game.dead = 0;
             Game.ClearGrid();
             Console.WriteLine();
             Console.WriteLine(" This is an implimentation of Conway's Game Of Life");
@@ -42,7 +42,7 @@ namespace GameOfLife
             int seconds = 0;            
             UpdateConsole(Game, seconds);
             Console.ReadKey();
-
+            
             for (int i = 0; i < 2;)
             {
                 timer.Start();        
@@ -63,9 +63,9 @@ namespace GameOfLife
             Console.WriteLine();
             Console.WriteLine("               Thanks for Playing! - Total Time = " + (seconds / 10) + " seconds.");
             Console.WriteLine();
-            Console.WriteLine("            During this game there were " + World.live + " Live Cells created.");
+            Console.WriteLine("            During this game there were " + Game.live + " Live Cells created.");
             Console.WriteLine();
-            Console.WriteLine("                  There were also " + World.dead + " Cells destroyed.");
+            Console.WriteLine("                  There were also " + Game.dead + " Cells destroyed.");
             Console.WriteLine();
             Console.WriteLine("         Press any key to play again!    or  'Q'  to Quit the game.");
             ConsoleKeyInfo endGame = Console.ReadKey(true);
@@ -75,12 +75,12 @@ namespace GameOfLife
 
         public static void UpdateConsole(World wld, int t)
         {
-            World World = wld;
+            World Game = wld;
             Console.Clear();
             Console.WriteLine();
-            Console.WriteLine("          LIVE = " + World.live + "    DEAD = " + World.dead  + "      TIME = " + t + "        Press ENTER to continue.");
+            Console.WriteLine("          LIVE = " + Game.live + "    DEAD = " + Game.dead  + "      TIME = " + t + "        Press ENTER to continue.");
             Console.WriteLine();
-            World.PrintGameGrid();
+            Game.PrintGameGrid();
         }
     }
 }

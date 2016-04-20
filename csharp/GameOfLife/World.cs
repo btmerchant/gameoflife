@@ -6,52 +6,78 @@ using System.Threading.Tasks;
 
 namespace GameOfLife
 {
-    class World
+    public class World
     {
-        private static int _width = 45;
-        private static int _size = width - 1;
-        private static int _live = 0;
-        private static int _dead = 0;
-        private static int[,] _gameGrid = new int[width, width];
-        private static int[,] _limbo = new int[width, width];
+        private int _width;
+        private int _size;
+        private int _live;
+        private int _dead;
+        private bool _border;
+        private int[,] _gameGrid;
+        private int[,] _limbo;
 
-        public static int[,] gameGrid
+        public int[,] gameGrid
         {
             get { return _gameGrid; }
             set { _gameGrid = value; }
         }
 
-        public static int live
+        public int live
         {
             get { return _live; }
             set { _live = value; }
         }
 
-        public static int dead
+        public int dead
         {
             get { return _dead; }
             set { _dead = value; }
         }
 
-        public static int[,] limbo
+        public bool border
+        {
+            get { return _border; }
+            set { _border = value; }
+        }
+
+        public int[,] limbo
         {
             get { return _limbo; }
             set { _limbo = value; }
         }
 
-        public static int size
+        public int size
         {
             get { return _size; }
+            set { _size = value; }
         }
 
-        public static int width
+        public int width
         {
             get { return _width; }
+            set { _width = value; }
+        }
+
+        public World()
+        {
+            border = false;
+            width = 45;
+            size = width - 1;
+            gameGrid = new int[width, width];
+            limbo = new int[width, width];
+        }
+
+        public World(int sz)
+        {
+            border = false;
+            width = sz;
+            size = width - 1;
+            gameGrid = new int[width, width];
+            limbo = new int[width, width];
         }
 
         public void PrintGameGrid()
         {
-            bool border = false;  // Can add a user choice for border later !!!
             int col = 0;
             int row = 0;
             for (row = 0; row <= size; row++)
@@ -123,6 +149,7 @@ namespace GameOfLife
                     if(r == 1)
                         live = live + 1;
                     gameGrid[x, y] = r;
+                    Shadow();
                 }
         }
 
@@ -233,6 +260,15 @@ namespace GameOfLife
             return count;
         }
 
+        public void Shadow() // Mirror the gameGrid to the shadow Limbo array, for pattern init
+        {
+            for (int x = 0; x <= size; x++)
+                for (int y = 0; y <= size; y++)
+                {
+                    limbo[x, y] = gameGrid[x, y];
+                }
+        }
+
         public void Seed(string pattern)
         {
             int s = gameGrid.GetLength(0);
@@ -242,13 +278,9 @@ namespace GameOfLife
                 case "B":  // Block
                     {
                         gameGrid[09, 09] = 1;
-                        limbo[09, 09] = 1;
                         gameGrid[10, 09] = 1;
-                        limbo[10, 09] = 1;
                         gameGrid[09, 10] = 1;
-                        limbo[09, 10] = 1;
                         gameGrid[10, 10] = 1;
-                        limbo[10, 10] = 1;
                         live = live + 4;
                         break;
                     }
@@ -257,11 +289,8 @@ namespace GameOfLife
                 case "L": // Blinker
                     {
                         gameGrid[09, 09] = 1;
-                        limbo[09, 09] = 1;
                         gameGrid[09, 10] = 1;
-                        limbo[09, 10] = 1;
                         gameGrid[09, 11] = 1;
-                        limbo[09, 11] = 1;
                         live = live + 3;
                         break;
                     }
@@ -270,15 +299,10 @@ namespace GameOfLife
                 case "G": // Glider
                     {
                         gameGrid[10, 09] = 1;
-                        limbo[10, 09] = 1;
                         gameGrid[11, 10] = 1;
-                        limbo[11, 10] = 1;
                         gameGrid[09, 11] = 1;
-                        limbo[09, 11] = 1;
                         gameGrid[10, 11] = 1;
-                        limbo[10, 11] = 1;
                         gameGrid[11, 11] = 1;
-                        limbo[11, 11] = 1;
                         live = live + 5;
                         break;
                     }
@@ -286,23 +310,14 @@ namespace GameOfLife
                 case "S": // Lightweight Spaceship
                     {
                         gameGrid[10, 10] = 1;
-                        limbo[10, 10] = 1;
                         gameGrid[10, 13] = 1;
-                        limbo[10, 13] = 1;
                         gameGrid[11, 14] = 1;
-                        limbo[11, 14] = 1;
                         gameGrid[12, 10] = 1;
-                        limbo[12, 10] = 1;
                         gameGrid[12, 14] = 1;
-                        limbo[12, 14] = 1;
                         gameGrid[13, 11] = 1;
-                        limbo[13, 11] = 1;
                         gameGrid[13, 12] = 1;
-                        limbo[13, 12] = 1;
                         gameGrid[13, 13] = 1;
-                        limbo[13, 13] = 1;
                         gameGrid[13, 14] = 1;
-                        limbo[13, 14] = 1;
                         live = live + 9;
                         break;
                     }
@@ -310,21 +325,13 @@ namespace GameOfLife
                 case "T":
                     {
                         gameGrid[10, 09] = 1;
-                        limbo[10, 09] = 1;
                         gameGrid[09, 09] = 1;
-                        limbo[09, 09] = 1;
                         gameGrid[08, 10] = 1;
-                        limbo[08, 10] = 1;
                         gameGrid[09, 11] = 1;
-                        limbo[09, 11] = 1;
                         gameGrid[07, 08] = 1;
-                        limbo[07, 08] = 1;
                         gameGrid[07, 09] = 1;
-                        limbo[07, 09] = 1;
                         gameGrid[06, 08] = 1;
-                        limbo[06, 08] = 1;
                         gameGrid[06, 07] = 1;
-                        limbo[06, 07] = 1;
                         live = live + 8;
                         break;
                     }
@@ -340,7 +347,9 @@ namespace GameOfLife
                         RandomGrid();
                         break;
                     }
+              
             }
+            Shadow();
         }
     }
 }
