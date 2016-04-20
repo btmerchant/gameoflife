@@ -275,7 +275,7 @@ namespace GameOfLife
             switch (pattern)                // row, col on indexing
             {
                 // Still Lifes
-                case "B":  // Block
+                case "K":  // Block
                     {
                         gameGrid[09, 09] = 1;
                         gameGrid[10, 09] = 1;
@@ -307,7 +307,7 @@ namespace GameOfLife
                         break;
                     }
 
-                case "S": // Lightweight Spaceship
+                case "P": // Lightweight Spaceship
                     {
                         gameGrid[10, 10] = 1;
                         gameGrid[10, 13] = 1;
