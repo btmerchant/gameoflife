@@ -58,22 +58,38 @@ namespace GameOfLife
             set { _width = value; }
         }
 
+        public int time { get; set; }
+
+        public int faultCount { set; get; }
+
+        public int gameOver { set; get; }
+
+        public int[,] checkGrid{ get; set;}
+
+        public int checkGridStep { get; set; }
+
         public World()
         {
-            border = false;
+            faultCount = 0;
+            gameOver = 0;
+            checkGridStep = 0;
             width = 45;
             size = width - 1;
             gameGrid = new int[width, width];
             limbo = new int[width, width];
+            checkGrid = new int[width, width];
         }
 
         public World(int sz)
         {
-            border = false;
+            faultCount = 0;
+            gameOver = 0;
+            checkGridStep = 0;
             width = sz;
             size = width - 1;
             gameGrid = new int[width, width];
             limbo = new int[width, width];
+            checkGrid = new int[width, width];
         }
 
         public void PrintGameGrid()
@@ -134,6 +150,7 @@ namespace GameOfLife
                     limbo[row, col] = status;
                 }
             }
+            CheckForOver();
             UpdateGrid();
         }
 
@@ -269,6 +286,53 @@ namespace GameOfLife
                 }
         }
 
+        public void CheckForOver()
+        {
+            switch(checkGridStep)
+            {
+                case 0:
+                    {
+                        for (int x = 0; x <= size; x++)
+                            for (int y = 0; y <= size; y++)
+                            {
+                                checkGrid[x, y] = gameGrid[x, y];
+                            }
+                        checkGridStep++;
+                        faultCount = 0;
+                        break;
+                    }
+
+                case 1:
+                    {
+                        checkGridStep++;
+                        break;
+                    }
+
+                case 2:
+                    {
+                        for (int x = 0; x <= size; x++)
+                            for (int y = 0; y <= size; y++)
+                            {
+                                if(checkGrid[x, y] != gameGrid[x, y]) { faultCount++; }
+                            }
+                        if(faultCount == 0) { gameOver++; }
+                        checkGridStep++;
+                        break;
+                    }
+
+                case 3:
+                    {
+                        checkGridStep = 0;
+                        break;
+                    }
+            }
+            if (gameOver > 0)
+            {
+                Console.WriteLine();
+                Console.WriteLine(" *****     G A M E     O V E R !     *****     Press return to proceed.");
+            }
+        }
+
         public void Seed(string pattern)
         {
             int s = gameGrid.GetLength(0);
@@ -277,10 +341,10 @@ namespace GameOfLife
                 // Still Lifes
                 case "K":  // Block
                     {
-                        gameGrid[09, 09] = 1;
-                        gameGrid[10, 09] = 1;
-                        gameGrid[09, 10] = 1;
-                        gameGrid[10, 10] = 1;
+                        gameGrid[02, 02] = 1;
+                        gameGrid[03, 02] = 1;
+                        gameGrid[02, 03] = 1;
+                        gameGrid[03, 03] = 1;
                         live = live + 4;
                         break;
                     }
@@ -288,9 +352,9 @@ namespace GameOfLife
                 // Oscilators
                 case "L": // Blinker
                     {
-                        gameGrid[09, 09] = 1;
-                        gameGrid[09, 10] = 1;
-                        gameGrid[09, 11] = 1;
+                        gameGrid[02, 02] = 1;
+                        gameGrid[02, 03] = 1;
+                        gameGrid[02, 04] = 1;
                         live = live + 3;
                         break;
                     }
@@ -298,41 +362,27 @@ namespace GameOfLife
                 //Spaceships
                 case "G": // Glider
                     {
-                        gameGrid[10, 09] = 1;
-                        gameGrid[11, 10] = 1;
-                        gameGrid[09, 11] = 1;
-                        gameGrid[10, 11] = 1;
-                        gameGrid[11, 11] = 1;
+                        gameGrid[03, 02] = 1;
+                        gameGrid[04, 03] = 1;
+                        gameGrid[02, 04] = 1;
+                        gameGrid[03, 04] = 1;
+                        gameGrid[04, 04] = 1;
                         live = live + 5;
                         break;
                     }
 
                 case "P": // Lightweight Spaceship
                     {
-                        gameGrid[10, 10] = 1;
-                        gameGrid[10, 13] = 1;
-                        gameGrid[11, 14] = 1;
-                        gameGrid[12, 10] = 1;
-                        gameGrid[12, 14] = 1;
-                        gameGrid[13, 11] = 1;
-                        gameGrid[13, 12] = 1;
-                        gameGrid[13, 13] = 1;
-                        gameGrid[13, 14] = 1;
-                        live = live + 9;
-                        break;
-                    }
-
-                case "T":
-                    {
-                        gameGrid[10, 09] = 1;
-                        gameGrid[09, 09] = 1;
-                        gameGrid[08, 10] = 1;
-                        gameGrid[09, 11] = 1;
-                        gameGrid[07, 08] = 1;
-                        gameGrid[07, 09] = 1;
-                        gameGrid[06, 08] = 1;
+                        gameGrid[03, 03] = 1;
+                        gameGrid[03, 06] = 1;
+                        gameGrid[04, 07] = 1;
+                        gameGrid[05, 03] = 1;
+                        gameGrid[05, 07] = 1;
+                        gameGrid[06, 04] = 1;
+                        gameGrid[06, 05] = 1;
+                        gameGrid[06, 06] = 1;
                         gameGrid[06, 07] = 1;
-                        live = live + 8;
+                        live = live + 9;
                         break;
                     }
 

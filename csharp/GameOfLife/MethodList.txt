@@ -3,7 +3,7 @@ public void PrintGameGrid()
 	Displays the current state of the Game Grid in the console.
 
 public void Cycle()
-	Cycles through the Grid, calls Rules() on each cell, mirrors the grid to Limbo, calls UpdateGrid() at the end.
+	Cycles through the Grid, calls Rules() on each cell, mirrors the grid to Limbo, Calls checkForGameOver(), calls UpdateGrid() at the end.
 
 public void RandomGrid()
 	Fills the Game Grid Array with Random cells either live or not.
@@ -28,3 +28,7 @@ public static void UpdateConsole(World wld, int t)
 
 public static Shadow()
 	Call after the Initial Pattern is loaded to also load the Limbo[] shadow array.
+
+public static void  DrawInstructions(bool tempBorder, int tempWidth)
+	Used to draw and redraw the main instructions to the screen.
+

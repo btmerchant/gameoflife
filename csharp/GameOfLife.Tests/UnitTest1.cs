@@ -154,8 +154,6 @@ namespace GameOfLife.Tests
             Assert.AreEqual(expected, actual);
         }
 
-
-
         [TestMethod]
         public void LiveCellPerimiterPattern09()
         {
@@ -322,14 +320,14 @@ namespace GameOfLife.Tests
         {
             int size = 15;
             World Game = new World(size);
-            Game.Seed("B"); // Still Life Block
+            Game.Seed("K"); // Still Life Block
             Game.Cycle(); // Simulate a time tick
 
             int[,] expected = new int[size, size]; // Fill the test grid with the expected result pattern
-            expected[09, 09] = 1;
-            expected[10, 09] = 1;
-            expected[09, 10] = 1;
-            expected[10, 10] = 1;
+            expected[02, 02] = 1;
+            expected[03, 02] = 1;
+            expected[02, 03] = 1;
+            expected[03, 03] = 1;
 
             for(int x = 0; x < size; x++) // Iterate through the grid and verify against sample pattern
             {
@@ -345,13 +343,13 @@ namespace GameOfLife.Tests
         {
             int size = 15;
             World Game = new World(size);
-            Game.Seed("L"); // Still Life Block
+            Game.Seed("L"); // Oscilator Block
             Game.Cycle(); // Simulate a time tick
 
             int[,] expected = new int[size, size]; // Fill the test grid with the expected result pattern
-            expected[08, 10] = 1;
-            expected[09, 10] = 1;
-            expected[10, 10] = 1;
+            expected[01, 03] = 1;
+            expected[02, 03] = 1;
+            expected[03, 03] = 1;
 
 
             for (int x = 0; x < size; x++) // Iterate through the grid and verify against sample pattern
@@ -363,20 +361,20 @@ namespace GameOfLife.Tests
             }
         }
 
-             [TestMethod]
+        [TestMethod]
         public void SpaceshipPattern19()
         {
             int size = 15;
             World Game = new World(size);
-            Game.Seed("G"); // Still Life Block
+            Game.Seed("G"); // Glider Block
             Game.Cycle(); // Simulate a time tick
 
             int[,] expected = new int[size, size]; // Fill the test grid with the expected result pattern
-            expected[09, 10] = 1;
-            expected[11, 10] = 1;
-            expected[11, 11] = 1;
-            expected[10, 11] = 1;
-            expected[10, 12] = 1;
+            expected[02, 03] = 1;
+            expected[04, 03] = 1;
+            expected[04, 04] = 1;
+            expected[03, 04] = 1;
+            expected[03, 05] = 1;
 
 
             for (int x = 0; x < size; x++) // Iterate through the grid and verify against sample pattern

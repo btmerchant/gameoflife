@@ -21,16 +21,23 @@ namespace GameOfLife
             string temp = seed.Key.ToString();
             if (temp == "B")
             {
-                tempBorder = true;
-                Console.WriteLine("A BORDER was requested Press Enter to proceed.");
-                Console.ReadKey();
+                if (tempBorder == true)
+                {
+                    tempBorder = false;
+                }
+                else
+                {
+                    tempBorder = true;
+                }
+                //Console.WriteLine("A BORDER was requested Press Enter to proceed.");
+                //Console.ReadKey();
                 goto begin;
             }
             else if(temp == "S")
             {
                 Console.WriteLine(" Please enter a value for the world Grid size 10 - 45");
                 int temp2 = Convert.ToInt32(Console.ReadLine());
-                if (temp2 > 45)
+                if (temp2 > 45  || temp2 < 10)
                 {
                     Console.WriteLine("Entered Value is not in correct range 10 - 45 please press enter to try again");
                     Console.ReadKey();
@@ -38,20 +45,24 @@ namespace GameOfLife
                     goto begin;
                 }
                 tempWidth = temp2;
-                Console.WriteLine(" The grid size has been set to " + tempWidth + " X " + tempWidth + " Press Enter to proceed.");
-                Console.ReadKey();
+                //Console.WriteLine(" The grid size has been set to " + tempWidth + " X " + tempWidth + " Press Enter to proceed.");
+                //Console.ReadKey();
                 goto begin;
             }
             else {}
             Stopwatch timer = new Stopwatch();
             World Game = new World(tempWidth);
-            if(tempBorder == true) { Game.border = true; }
+            if (tempBorder == true)
+            {
+                Game.border = true;
+            }
+            else { Game.border = false; }
             Game.live = 0;
             Game.dead = 0;
             Game.ClearGrid();
             Game.Seed(seed.Key.ToString());
-            int seconds = 0;            
-            UpdateConsole(Game, seconds);
+            Game.time = 0;            
+            UpdateConsole(Game, Game.time);
             Console.ReadKey();
             
             for (int i = 0; i < 2;)
@@ -59,20 +70,21 @@ namespace GameOfLife
                 timer.Start();        
                     if (timer.ElapsedMilliseconds % 100 == 0)
                     {
-                        UpdateConsole(Game, seconds);
+                        if(Game.gameOver != 0) { goto stats; }
+                        UpdateConsole(Game, Game.time);
                         Game.Cycle();
-                        seconds++;
+                        Game.time++;
                         if (Console.KeyAvailable) { break; }
                     }
                 //timer.Stop();
             }
-            Console.ReadKey();
+            stats:
             Console.ReadKey();
             Console.Clear();
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine("               Thanks for Playing! - Total Time = " + (seconds / 10) + " seconds.");
+            Console.WriteLine("               Thanks for Playing! - Total Time = " + (Game.time / 10) + " seconds.");
             Console.WriteLine();
             Console.WriteLine("            During this game there were " + Game.live + " Live Cells created.");
             Console.WriteLine();
@@ -84,12 +96,14 @@ namespace GameOfLife
                 { Console.Clear(); goto begin; }
         }
 
-        public static void  DrawInstructions(bool tempBorder, int tempWidth)
+        public static void DrawInstructions(bool tempBorder, int tempWidth)
         {
             Console.Clear();
             Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine(" Border = " + tempBorder + "      Grid = " + tempWidth + " X " + tempWidth);
-            Console.WriteLine();
+            Console.WriteLine("__________________________________________________________________________________");
+            Console.ResetColor();
             Console.WriteLine();
             Console.WriteLine(" This is an implimentation of Conway's Game Of Life");
             Console.WriteLine();
@@ -120,7 +134,10 @@ namespace GameOfLife
             World Game = wld;
             Console.Clear();
             Console.WriteLine();
-            Console.WriteLine("          LIVE = " + Game.live + "    DEAD = " + Game.dead  + "      TIME = " + t + "        Press ENTER to continue.  " + Game.width + " X " + Game.width);
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine(" LIVE = " + Game.live + "    DEAD = " + Game.dead  + "      TIME = " + t + "          " + Game.width + " X " + Game.width + "        Press ENTER to continue.  ");
+            Console.WriteLine("___________________________________________________________________________________________");
+            Console.ResetColor();
             Console.WriteLine();
             Game.PrintGameGrid();
         }
