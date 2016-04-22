@@ -60,6 +60,8 @@ namespace GameOfLife
 
         public int time { get; set; }
 
+        public int timeStep { get; set; }
+
         public int faultCount { set; get; }
 
         public int gameOver { set; get; }
@@ -73,6 +75,7 @@ namespace GameOfLife
             faultCount = 0;
             gameOver = 0;
             checkGridStep = 0;
+            timeStep = 1000;
             width = 45;
             size = width - 1;
             gameGrid = new int[width, width];
@@ -85,6 +88,7 @@ namespace GameOfLife
             faultCount = 0;
             gameOver = 0;
             checkGridStep = 0;
+            timeStep = 1000;
             width = sz;
             size = width - 1;
             gameGrid = new int[width, width];
