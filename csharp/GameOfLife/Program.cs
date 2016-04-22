@@ -12,11 +12,12 @@ namespace GameOfLife
         static void Main(string[] args)
         {
             Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
-            bool tempBorder = false;
+            bool tempBorder = false; // These variables are needed as the "World" does not exist yet.
             int tempTimeStep = 1000;
             int tempWidth = 45;
+            int tempEnd = 0;
             begin:
-            DrawInstructions(tempBorder, tempWidth, tempTimeStep);
+            DrawInstructions(tempBorder, tempWidth, tempTimeStep, tempEnd);
             ConsoleKeyInfo seed = Console.ReadKey(true);
             string temp = seed.Key.ToString();
             if (temp == "B")
@@ -35,6 +36,15 @@ namespace GameOfLife
             {
                 tempTimeStep = tempTimeStep + 10000;
                 if(tempTimeStep > 91000) { tempTimeStep = 1000; }
+                goto begin;
+            }
+            else if (temp == "E")
+            {
+                if(tempEnd == 0)
+                {
+                    tempEnd = 1;
+                }
+                else { tempEnd = 0; }
                 goto begin;
             }
             else if(temp == "S")
@@ -60,6 +70,7 @@ namespace GameOfLife
             }
             else { Game.border = false; }
             Game.timeStep = Game.timeStep + tempTimeStep;
+            Game.end = tempEnd;
             Game.live = 0;
             Game.dead = 0;
             Game.ClearGrid();
@@ -105,12 +116,12 @@ namespace GameOfLife
                 { Console.Clear(); goto begin; }
         }
 
-        public static void DrawInstructions(bool tempBorder, int tempWidth, int timeStep)
+        public static void DrawInstructions(bool tempBorder, int tempWidth, int timeStep, int tempEnd)
         {
             Console.Clear();
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine(" Border = " + tempBorder + "      Interval " + timeStep + "      Grid = " + tempWidth + " X " + tempWidth);
+            Console.WriteLine(" Border = " + tempBorder + "      GameOverFeature " + tempEnd + "      Interval " + timeStep + "      Grid = " + tempWidth + " X " + tempWidth);
             Console.WriteLine("__________________________________________________________________________________");
             Console.ResetColor();
             Console.WriteLine();
@@ -127,6 +138,8 @@ namespace GameOfLife
             Console.WriteLine(" Press S to enter a SIZE for the world between 10 and 45");
             Console.WriteLine();
             Console.WriteLine(" Press Z to increase Time Interval to between 1000 and 91000");
+            Console.WriteLine();
+            Console.WriteLine(" Press E to toggle Automatic Game Over feature");
             Console.WriteLine();
             Console.WriteLine("     K = Block");
             Console.WriteLine();

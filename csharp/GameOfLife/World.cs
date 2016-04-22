@@ -70,12 +70,15 @@ namespace GameOfLife
 
         public int checkGridStep { get; set; }
 
+        public int end { get; set; }
+
         public World()
         {
             faultCount = 0;
             gameOver = 0;
             checkGridStep = 0;
             timeStep = 1000;
+            end = 0;
             width = 45;
             size = width - 1;
             gameGrid = new int[width, width];
@@ -89,6 +92,7 @@ namespace GameOfLife
             gameOver = 0;
             checkGridStep = 0;
             timeStep = 1000;
+            end = 0;
             width = sz;
             size = width - 1;
             gameGrid = new int[width, width];
@@ -319,7 +323,7 @@ namespace GameOfLife
                             {
                                 if(checkGrid[x, y] != gameGrid[x, y]) { faultCount++; }
                             }
-                        if(faultCount == 0) { gameOver++; }
+                        if(faultCount == 0 && end > 0) { gameOver++; }
                         checkGridStep++;
                         break;
                     }
@@ -330,7 +334,7 @@ namespace GameOfLife
                         break;
                     }
             }
-            if (gameOver > 0)
+            if (gameOver > 0 && end > 0)
             {
                 Console.WriteLine();
                 Console.WriteLine("*****     G A M E     O V E R !     *****          Press return to proceed.");
