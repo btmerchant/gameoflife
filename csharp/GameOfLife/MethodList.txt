@@ -32,3 +32,5 @@ public static Shadow()
 public static void  DrawInstructions(bool tempBorder, int tempWidth)
 	Used to draw and redraw the main instructions to the screen.
 
+public void CheckForOver()
+	Tests the grid for lack of movement (compensates for "Blinkers") and ends the game when apropriate.

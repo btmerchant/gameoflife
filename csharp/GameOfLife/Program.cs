@@ -29,24 +29,20 @@ namespace GameOfLife
                 {
                     tempBorder = true;
                 }
-                //Console.WriteLine("A BORDER was requested Press Enter to proceed.");
-                //Console.ReadKey();
                 goto begin;
             }
             else if(temp == "S")
             {
-                Console.WriteLine(" Please enter a value for the world Grid size 10 - 45");
+                Console.WriteLine(" Please enter a value for the World Grid SIZE between 10 - 45");
                 int temp2 = Convert.ToInt32(Console.ReadLine());
                 if (temp2 > 45  || temp2 < 10)
                 {
-                    Console.WriteLine("Entered Value is not in correct range 10 - 45 please press enter to try again");
+                    Console.WriteLine("The entered Value is not in the correct range 10 - 45 please press ENTER to try again");
                     Console.ReadKey();
                     Console.Clear();
                     goto begin;
                 }
                 tempWidth = temp2;
-                //Console.WriteLine(" The grid size has been set to " + tempWidth + " X " + tempWidth + " Press Enter to proceed.");
-                //Console.ReadKey();
                 goto begin;
             }
             else {}
@@ -76,7 +72,6 @@ namespace GameOfLife
                         Game.time++;
                         if (Console.KeyAvailable) { break; }
                     }
-                //timer.Stop();
             }
             stats:
             Console.ReadKey();
@@ -111,21 +106,21 @@ namespace GameOfLife
             Console.WriteLine();
             Console.WriteLine(" Please choose a Pattern with witch to Seed the Game Grid (enter a letter to choose)");
             Console.WriteLine();
-            Console.WriteLine(" Just press ENTER at any time to move forward and except the Default selections.");
+            Console.WriteLine(" Just press ENTER at any time to move forward and except the DEFAULT selections.");
             Console.WriteLine();
-            Console.WriteLine(" Press b if you would like a Border around the World grid");
+            Console.WriteLine(" Press B if you would like a BORDER around the World grid");
             Console.WriteLine();
-            Console.WriteLine(" Press s to enter a size for the world between 10 and 45");
+            Console.WriteLine(" Press S to enter a SIZE for the world between 10 and 45");
             Console.WriteLine();
-            Console.WriteLine("     k = Block");
+            Console.WriteLine("     K = Block");
             Console.WriteLine();
-            Console.WriteLine("     l = Blinker");
+            Console.WriteLine("     L = Blinker");
             Console.WriteLine();
             Console.WriteLine("     G = Glider");
             Console.WriteLine();
-            Console.WriteLine("     p = Lightweight Spaceship");
+            Console.WriteLine("     P = Lightweight Spaceship");
             Console.WriteLine();
-            Console.WriteLine("     r = Random Fill");
+            Console.WriteLine("     R = Random Fill");
             Console.WriteLine();
         }
 

@@ -329,7 +329,7 @@ namespace GameOfLife
             if (gameOver > 0)
             {
                 Console.WriteLine();
-                Console.WriteLine(" *****     G A M E     O V E R !     *****     Press return to proceed.");
+                Console.WriteLine("*****     G A M E     O V E R !     *****          Press return to proceed.");
             }
         }
 
