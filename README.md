@@ -2,6 +2,7 @@
 
 ![GameOfLifeImage](./GameOfLifeScreenShot.png)
 
+Download the GameOfLife.exe file to try it on your windows PC.
 ## Game Rules
 1. Any live cell with fewer than two live neighbours dies, as if caused by under-population.
 2. Any live cell with two or three live neighbours lives on to the next generation.
